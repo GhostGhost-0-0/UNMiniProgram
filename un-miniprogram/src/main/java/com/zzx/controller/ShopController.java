@@ -1,5 +1,6 @@
 package com.zzx.controller;
 
+import com.zzx.annotation.SystemLog;
 import com.zzx.domain.ResponseResult;
 import com.zzx.domain.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,13 @@ public class ShopController {
     private ShopService shopService;
 
     @GetMapping("/getHotAndNew")
+    @SystemLog(businessName = "获取热门商品")
     public ResponseResult getHotAndNew() {
         return shopService.getHotAndNew();
     }
 
     @GetMapping("/getShopDetail")
+    @SystemLog(businessName = "获取商品详情")
     public ResponseResult getShopDetail(@RequestParam Long id) {
         return shopService.getShopDetail(id);
     }

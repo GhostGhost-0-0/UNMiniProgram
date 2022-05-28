@@ -1,5 +1,6 @@
 package com.zzx.controller;
 
+import com.zzx.annotation.SystemLog;
 import com.zzx.domain.ResponseResult;
 import com.zzx.domain.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,19 @@ public class CourseController {
     private CourseService coursesService;
 
     @GetMapping("/hotCourseList")
+    @SystemLog(businessName = "获取热门训练列表")
     public ResponseResult hotCourseList() {
         return coursesService.hotCourseList();
     }
 
     @GetMapping("/courseList")
+    @SystemLog(businessName = "获取全部训练列表")
     public ResponseResult courseLitt() {
         return coursesService.courseList();
     }
 
     @GetMapping("/courseDetail")
+    @SystemLog(businessName = "获取训练详情")
     public ResponseResult courseDetail(@RequestParam("courseId") Long id) {
         return coursesService.courseDetail(id);
     }

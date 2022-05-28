@@ -1,6 +1,7 @@
 package com.zzx.controller;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.zzx.annotation.SystemLog;
 import com.zzx.domain.ResponseResult;
 import com.zzx.domain.entity.Comment;
 import com.zzx.domain.service.CommentService;
@@ -21,6 +22,7 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("/commentList")
+    @SystemLog(businessName = "获取评论列表")
     public ResponseResult commentList(@RequestParam Long articleId,
                                       @RequestParam Integer pageNum,
                                       @RequestParam Integer pageSize) {
@@ -28,6 +30,7 @@ public class CommentController {
     }
 
     @PostMapping("/comment")
+    @SystemLog(businessName = "发表评论")
     public ResponseResult comment(@RequestBody Comment comment) {
         return commentService.comment(comment);
     }

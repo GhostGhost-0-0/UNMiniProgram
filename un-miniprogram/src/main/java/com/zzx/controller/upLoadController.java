@@ -1,5 +1,6 @@
 package com.zzx.controller;
 
+import com.zzx.annotation.SystemLog;
 import com.zzx.domain.ResponseResult;
 import com.zzx.domain.service.UpLoadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,9 @@ public class upLoadController {
     @Autowired
     UpLoadService upLoadService;
 
-    @PostMapping("/upload")
+    /*@PostMapping("/upload")
+    @SystemLog(businessName = "上传图片到七牛云")
     private ResponseResult upLoadImg(@RequestBody MultipartFile file) {
         return upLoadService.upLoadOss(file);
-    }
+    }*/
 }

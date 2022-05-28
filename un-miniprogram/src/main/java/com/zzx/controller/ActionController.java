@@ -1,5 +1,6 @@
 package com.zzx.controller;
 
+import com.zzx.annotation.SystemLog;
 import com.zzx.domain.ResponseResult;
 import com.zzx.domain.service.ActionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class ActionController {
     private ActionService actionService;
 
     @GetMapping("/actionDetail")
+    @SystemLog(businessName = "获取动作详情")
     public ResponseResult actionDetail(@RequestParam("actionId") Long id) {
         return actionService.actionDetail(id);
     }
