@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserVo {
+public class UserInfoVo {
 
     //主键
     private Long id;
@@ -30,5 +30,7 @@ public class UserVo {
     private String province;
     //城市
     private String city;
+    //openid
+    private String openid;
 
 }
