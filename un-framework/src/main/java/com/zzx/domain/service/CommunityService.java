@@ -19,5 +19,9 @@ public interface CommunityService extends IService<Community> {
     ResponseResult communityList();
 
     ResponseResult addCommunity(Community community, MultipartFile file);
+
+    ResponseResult communityDetail(Long id);
+
+    ResponseResult communityLike(Long communityId, String likedUserId, String likedPostId);
 }
 

@@ -1,10 +1,10 @@
 package com.zzx.controller;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.zzx.annotation.SystemLog;
 import com.zzx.domain.ResponseResult;
 import com.zzx.domain.entity.Community;
 import com.zzx.domain.service.CommunityService;
+import com.zzx.domain.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +22,9 @@ public class CommunityController {
 
     @Autowired
     private CommunityService communityService;
+
+    @Autowired
+    private RedisService redisService;
 
     @GetMapping("/hotCommunityList")
     @SystemLog(businessName = "获取热门社区动态列表")
@@ -52,4 +55,11 @@ public class CommunityController {
         community.setOpenid(openid);
         return communityService.addCommunity(community,file);
     }
+
+    @PostMapping("/like")
+    @SystemLog(businessName = "点赞")
+    public ResponseResult communityLike(Long communityId, String likedUserId, String likedPostId) {
+        return communityService.communityLike(communityId,likedUserId,likedPostId);
+    }
+
 }

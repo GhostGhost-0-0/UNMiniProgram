@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
  * @author makejava
  * @since 2022-02-28 13:52:52
  */
-@SuppressWarnings("serial")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
