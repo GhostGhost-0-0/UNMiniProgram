@@ -1,8 +1,6 @@
 package com.zzx.job;
 
 import com.zzx.domain.service.CommunityLikeService;
-import com.zzx.domain.service.CommunityService;
-import com.zzx.domain.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
