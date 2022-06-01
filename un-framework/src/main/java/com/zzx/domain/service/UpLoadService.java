@@ -14,5 +14,5 @@ public abstract class UpLoadService {
 
     protected CloudStorageConfig config;
 
-    public abstract ResponseResult upLoadOss(MultipartFile file);
+    public abstract String upLoadOss(MultipartFile file);
 }

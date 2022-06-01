@@ -45,13 +45,13 @@ public class UploadServiceImpl extends UpLoadService {
     }
 
     @Override
-    public ResponseResult upLoadOss(MultipartFile file) {
+    public String upLoadOss(MultipartFile file) {
         //获取文件的名称
         String fileName = file.getOriginalFilename();
         //使用工具类根据上传文件生成唯一图片名称
         String imgName = PathUtils.generateFilePath(fileName);
         if (file.isEmpty()) {
-            return ResponseResult.errorResult(AppHttpCodeEnum.FILE_NULL_ERROR);
+            throw new RuntimeException(AppHttpCodeEnum.FILE_NULL_ERROR.getMsg());
         }
         try {
             FileInputStream fileInputStream = (FileInputStream) file.getInputStream();
@@ -64,10 +64,10 @@ public class UploadServiceImpl extends UpLoadService {
 
             String path = config.getDomain() + "/" + putRet.key;
             //这个return path是获得到的外链地址，通过这个地址可以直接打开图片
-            return ResponseResult.okResult(path);
+            return path;
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return ResponseResult.errorResult(AppHttpCodeEnum.FILE_NULL_ERROR);
+        return AppHttpCodeEnum.FILE_NULL_ERROR.getMsg();
     }
 }
