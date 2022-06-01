@@ -1,6 +1,7 @@
 package com.zzx.domain.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zzx.config.WxConfig;
 import com.zzx.domain.ResponseResult;
@@ -8,6 +9,7 @@ import com.zzx.domain.entity.User;
 import com.zzx.domain.mapper.UserMapper;
 import com.zzx.domain.service.UserService;
 import com.zzx.utils.HttpClientUtils;
+import com.zzx.utils.UuidUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,26 +49,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public ResponseResult login(String openid, String avatar, String nickName, String sex, String city, String province, String country) {
+    public User login(User insertUser) {
         //根据返回的user实体类，判断用户是否是新用户，不是的话，更新登录时间，是的话，将用户信息存到数据库
-        User user = getById(openid);
+        System.out.println(insertUser);
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getOpenid, insertUser.getOpenid());
+        User user = getOne(queryWrapper);
         if (user != null) {
-            user.setCreateTime(new Date());
+            user.setUpdateTime(new Date());
             updateById(user);
+            return user;
         } else {
-            User insert_user = new User();
-            insert_user.setOpenid(openid);
-            insert_user.setAvatar(avatar);
-            insert_user.setNickName(nickName);
-            insert_user.setSex(sex);
-            insert_user.setCity(city);
-            insert_user.setProvince(province);
-            insert_user.setCountry(country);
-            insert_user.setCreateTime(new Date());
-            insert_user.setCreateBy(insert_user.getId());
-            save(insert_user);
+            insertUser.setId(UuidUtils.getId());
+            insertUser.setCreateTime(new Date());
+            insertUser.setUpdateTime(new Date());
+            save(insertUser);
+            return insertUser;
         }
-        return ResponseResult.okResult();
     }
 }
 

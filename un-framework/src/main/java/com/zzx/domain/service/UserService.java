@@ -3,6 +3,7 @@ package com.zzx.domain.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zzx.domain.ResponseResult;
 import com.zzx.domain.entity.User;
+import com.zzx.domain.entity.WeChatLoginCode;
 
 
 /**
@@ -15,6 +16,6 @@ public interface UserService extends IService<User> {
 
     ResponseResult getOpenId(String code);
 
-    ResponseResult login(String openid, String avatar, String nickName, String sex, String city, String province, String country);
+    User login(User insertUser);
 }
 
